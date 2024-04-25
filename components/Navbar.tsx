@@ -3,7 +3,6 @@ import React from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import MultiModal from "./ui/modal/MultiModal";
-import SignUpModal from "./ui/modal/SignUpModal";
 const Navbar = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignupOpen, setIsSignupOpen] = useState(false);
