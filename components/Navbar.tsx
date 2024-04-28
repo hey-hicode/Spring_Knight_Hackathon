@@ -4,23 +4,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import MultiModal from "./ui/modal/MultiModal";
 const Navbar = () => {
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isSignupOpen, setIsSignupOpen] = useState(false);
-
-  const openLoginModal = () => {
-    setIsLoginOpen(true);
-    setIsSignupOpen(false);
-  };
-
-  const openSignupModal = () => {
-    setIsSignupOpen(true);
-    setIsLoginOpen(false); // Close the login modal if it's open
-  };
-
-  const closeModals = () => {
-    setIsLoginOpen(false);
-    setIsSignupOpen(false);
-  };
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
@@ -58,7 +41,7 @@ const Navbar = () => {
 
             <div className="order-2 md:order-3">
               <button
-                onClick={toggleModal} 
+                onClick={toggleModal}
                 className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2"
               >
                 <svg
@@ -73,9 +56,7 @@ const Navbar = () => {
                     clip-rule="evenodd"
                   />
                 </svg>
-                <span className="">
-                {'Login'}
-                </span>
+                <span className="">{"Login"}</span>
               </button>
 
               <></>
@@ -85,7 +66,6 @@ const Navbar = () => {
       </div>
 
       <MultiModal isOpen={isModalOpen} onClose={toggleModal} />
-
     </>
   );
 };

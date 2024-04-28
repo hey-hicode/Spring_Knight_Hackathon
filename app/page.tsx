@@ -13,7 +13,7 @@ export default function Home() {
           <div className="font-gooper md:max-w-[600px]  font-bold text-[26px] flex-col md:text-6xl flex lg:justify-center py-2 x lg:items-start">
             <div className="md:gap-2 md:max-w-full">
               <h1 className="  "> Why</h1>
-              <h1 className="  md:pt-3">Y Combinator?</h1>
+              <h1 className="  md:pt-3"> LaunchLeap?</h1>
             </div>
           </div>
           <p className="md:text-lg text-[13px]  text-center justify-center lg:text-start font-medium max-w-[360px] md:max-w-[599px]">

@@ -1,7 +1,57 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
 import React from "react";
-
+import useFetch from "@/components/Hooks/useFetch";
+import { Console } from "console";
 const page = () => {
+  const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [fullName, setFullName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const handleSignUp = async (e: any) => {
+    // Prevent default form submission behavior
+    e.preventDefault();
+
+    setLoading(true);
+    try {
+      const payload = {
+        email: email,
+        username: username,
+        fullName: fullName,
+        password: password,
+      };
+      const response = await fetch(
+        "https://hackathon.buildhubb.com/auth/investor/login.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (response.status === 200) {
+      } else if (response.status === 400) {
+        console.log("User with this email has already been waitlisted");
+      } else if (response.status === 422) {
+        toogleErr();
+        console.log("Attention! Empty fields need your attention");
+      } else {
+        console.log(
+          "An Error in your Details. Please try again inputting your details correctly."
+        );
+      }
+    } catch (error) {
+      console.error("Error joining waitlist:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div>
       <section className="relative flex flex-wrap lg:h-screen lg:items-center">
@@ -17,7 +67,7 @@ const page = () => {
             </p>
           </div>
 
-          <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+          <form  onSubmit={handleSignUp} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
@@ -26,6 +76,8 @@ const page = () => {
               <div className="relative">
                 <input
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded-lg bg-slate-200 border-none p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter email"
                 />
@@ -56,8 +108,25 @@ const page = () => {
               <div className="relative">
                 <input
                   type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   className="w-full rounded-lg bg-slate-200 border-none p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter Your username"
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="email" className="sr-only">
+                FullName
+              </label>
+
+              <div className="relative">
+                <input
+                  type="text"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  className="w-full rounded-lg bg-slate-200 border-none p-4 pe-12 text-sm shadow-sm"
+                  placeholder="Enter Your FullName"
                 />
               </div>
             </div>
@@ -83,6 +152,8 @@ const page = () => {
               <div className="relative">
                 <input
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full rounded-lg border-none bg-slate-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter password"
                 />
@@ -120,9 +191,10 @@ const page = () => {
 
               <button
                 type="submit"
+                
                 className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
               >
-                Sign Up
+                {loading? "loading" :" Sign Up"}
               </button>
             </div>
           </form>
@@ -141,3 +213,22 @@ const page = () => {
 };
 
 export default page;
+function setLoading(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
+
+function toogleCongrat() {
+  throw new Error("Function not implemented.");
+}
+
+function toogleErr() {
+  throw new Error("Function not implemented.");
+}
+
+function SetErrMessage(arg0: string) {
+  throw new Error("Function not implemented.");
+}
+
+function SetErrButton(arg0: string) {
+  throw new Error("Function not implemented.");
+}
